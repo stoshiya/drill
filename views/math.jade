@@ -1,0 +1,62 @@
+doctype 5
+html
+  head
+    title #{title}
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    script(src='/javascripts/jquery-1.8.3.min.js')
+    script
+      setInterval(function() {
+        if (#{corrected}) {
+          clearInterval(0);
+          return;
+        }
+        $('.elapsed').text(parseInt($('.elapsed').text()) + 1);
+      }, 1000);
+
+  body
+    div.container
+      form(method='post', action='/')
+        - var i = 0;
+        - var focused = false;
+        - each question in questions
+          - var box = typeof(question.box) !== 'undefined' ? question.box : '';
+          - var clz = (i % 2 === 0) ? 'left' : 'right';
+          div(class='#{clz}')
+            span #{question.term0}
+            span &#8722;
+            span #{question.term1}
+            span &#61;
+            span
+              - if (question.result)
+                input.box(type='number', name='box-#{i}', value='#{box}', readonly)
+              - else if (!focused)
+                input.box(type='number', name='box-#{i}', value='#{box}', autofocus)
+                - focused = true;
+              - else
+                input.box(type='number', name='box-#{i}', value='#{box}')
+            - if (typeof(question.box) !== 'undefined')
+              - if (question.result)
+                span(style='color: blue') #{label.correct}
+              - else
+                span(style='color: red') #{label.incorrect}
+
+          input(type='hidden', name='term0-#{i}', value='#{question.term0}')
+          input(type='hidden', name='term1-#{i}', value='#{question.term1}')
+
+          - i++;
+
+        input(type='hidden', name='start', value='#{start}')
+
+        div
+          input.button#verify(type='submit', value='#{label.verify}')
+          input.button#reset(type='button', value='#{label.reset}', onclick='self.location.href="/"')
+
+        - var elapsed = (typeof(elapsed) !== 'undefined') ? elapsed : 0;
+        div
+          span.elapsed #{elapsed}
+          span #{label.second}
+
+    script
+      if (#{corrected}) {
+        $('#verify').attr('disabled', true);
+      }

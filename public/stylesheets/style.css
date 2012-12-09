@@ -1,0 +1,36 @@
+body {
+  padding: 20px;
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.container {
+  position: relative;
+}
+
+.left {
+  width: 50%;
+  float: left;
+}
+
+.right {
+  width: 50%;
+  float: left;
+}
+
+span {
+  margin: 3px;
+}
+
+.box {
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+  width: 70px;
+}
+
+.button {
+  font: 30px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+

@@ -1,0 +1,18 @@
+div
+span #{question.term0}
+span &#8722;
+span #{question.term1}
+span &#61;
+span
+  - if (question.result)
+    input.box(type='number', name='box-#{i}', value='#{box}', readonly)
+  - else if (!focused)
+    input.box(type='number', name='box-#{i}', value='#{box}', autofocus)
+    - focused = true;
+  - else
+    input.box(type='number', name='box-#{i}', value='#{box}')
+- if (typeof(question.box) !== 'undefined')
+  - if (question.result)
+    span(style='color: blue') #{label.correct}
+  - else
+    span(style='color: red') #{label.incorrect}
