@@ -3,8 +3,7 @@ var result = require('./../lib/result')
 
 var num = 10;
 
-exports.create = function(req, res, hoge){
-  console.log(hoge);
+exports.create = function(req, res){
   var questions = [];
   for (var i = 0; i < num; i++) {
     questions.push({
