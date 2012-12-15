@@ -23,7 +23,10 @@ html
           - var clz = (i % 2 === 0) ? 'left' : 'right';
           div(class='#{clz}')
             span #{question.term0}
-            span &#8722;
+            - if (question.operator === 'plus')
+              span &#43;
+            - if (question.operator === 'minus')
+              span &#8722;
             span #{question.term1}
             span &#61;
             span
@@ -42,6 +45,7 @@ html
 
           input(type='hidden', name='term0-#{i}', value='#{question.term0}')
           input(type='hidden', name='term1-#{i}', value='#{question.term1}')
+          input(type='hidden', name='operator-#{i}', value='#{question.operator}')
 
           - i++;
 
@@ -49,7 +53,8 @@ html
 
         div
           input.button#verify(type='submit', value='#{label.verify}')
-          input.button#reset(type='button', value='#{label.reset}', onclick='self.location.href="/"')
+          input.button#reset(type='button', value='#{label.reset}', onclick='self.location.href="#{path}"')
+          input(type='hidden', name='path', value='#{path}')
 
         - var elapsed = (typeof(elapsed) !== 'undefined') ? elapsed : 0;
         div
